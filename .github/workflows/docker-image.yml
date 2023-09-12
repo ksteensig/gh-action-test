@@ -24,7 +24,10 @@ jobs:
     - name: Install pants
       run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
     - name: Packaging
-      run: bash -c '/home/runner/bin/pants package ::'
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        echo $(ls)
+  # bash -c '/home/runner/bin/pants package ::'
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # - name: Install ghr
