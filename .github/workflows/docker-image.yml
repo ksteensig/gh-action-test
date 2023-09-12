@@ -16,4 +16,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:${GITHUB_SHA::7}
     - name: Package program
-      run: docker run my-image-name:${GITHUB_SHA::7} bash -c 'echo hello, world'
+      run: docker run my-image-name:${GITHUB_SHA::7} -token ${{ secrets.GITHUB_TOKEN }} /usr/local/bin/ghr ${GITHUB_SHA::7} main.py
