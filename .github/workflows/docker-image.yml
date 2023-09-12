@@ -24,10 +24,10 @@ jobs:
     - name: Install pants
       run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
     - name: Install ghr
-      run:  wget https://github.com/tcnksm/ghr/releases/download/v0.16.0/ghr_v0.16.0_linux_amd64.tar.gz && \
-            tar -xvf ghr_v0.16.0_linux_amd64.tar.gz && \
-            mv ghr_v0.16.0_linux_amd64/ghr /usr/local/bin/ghr &&
-
+      run: |
+        wget https://github.com/tcnksm/ghr/releases/download/v0.16.0/ghr_v0.16.0_linux_amd64.tar.gz
+        tar -xvf ghr_v0.16.0_linux_amd64.tar.gz
+        mv ghr_v0.16.0_linux_amd64/ghr /usr/local/bin/ghr
     - name: Release
       run: |
         /usr/local/bin/ghr ${GITHUB_SHA::7} ${GITHUB_WORKSPACE}
