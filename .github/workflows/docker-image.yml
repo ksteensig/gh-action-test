@@ -30,8 +30,8 @@ jobs:
         mv ghr_v0.16.0_linux_amd64/ghr /usr/local/bin/ghr
     - name: Release
       run: |
-        /usr/local/bin/ghr -t ${{ secrets.PAT }} ${GITHUB_SHA::7} ${GITHUB_WORKSPACE}
+        /usr/local/bin/ghr ${GITHUB_SHA::7} ${GITHUB_WORKSPACE}
       env:
-        GITHUB_TOKEN: 
+        GITHUB_TOKEN: ${{ secrets.PAT }}
 
 # /usr/local/bin/ghr test_tag /usr/local/bin/ghr
