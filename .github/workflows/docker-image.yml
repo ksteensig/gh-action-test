@@ -23,18 +23,15 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
     - name: Install pants
       run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
-    - name: Packaging
+    - name: Install ghr
+      run:  wget https://github.com/tcnksm/ghr/releases/download/v0.16.0/ghr_v0.16.0_linux_amd64.tar.gz && \
+            tar -xvf ghr_v0.16.0_linux_amd64.tar.gz && \
+            mv ghr_v0.16.0_linux_amd64/ghr /usr/local/bin/ghr &&
+
+    - name: Release
       run: |
-        cd ${GITHUB_WORKSPACE}
-        echo $(ls)
-  # bash -c '/home/runner/bin/pants package ::'
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    # - name: Install ghr
-    #   run:  wget https://github.com/tcnksm/ghr/releases/download/v0.16.0/ghr_v0.16.0_linux_amd64.tar.gz && \
-    #         tar -xvf ghr_v0.16.0_linux_amd64.tar.gz && \
-    #         mv ghr_v0.16.0_linux_amd64/ghr /usr/local/bin/ghr &&
-    # - name: Package
-    #   run: pants package ::
+        /usr/local/bin/ghr ${GITHUB_SHA::7} ${GITHUB_WORKSPACE}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 # /usr/local/bin/ghr test_tag /usr/local/bin/ghr
