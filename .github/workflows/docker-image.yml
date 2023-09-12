@@ -1,10 +1,7 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   release:
@@ -32,5 +29,3 @@ jobs:
         /usr/local/bin/ghr ${GITHUB_SHA::7} ${GITHUB_WORKSPACE}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# /usr/local/bin/ghr test_tag /usr/local/bin/ghr
