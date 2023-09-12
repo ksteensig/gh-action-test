@@ -21,8 +21,8 @@ jobs:
           wget
       env:
         DEBIAN_FRONTEND: noninteractive
-    # - name: Install pants
-    #   run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+    - name: Install pants
+      run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # - name: Install ghr
