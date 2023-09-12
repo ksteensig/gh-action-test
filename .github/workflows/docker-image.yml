@@ -9,13 +9,20 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:22.04
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:${GITHUB_SHA::7}
-    - name: Package program
-      run: docker run my-image-name:${GITHUB_SHA::7} bash -c '/usr/local/bin/ghr test_tag /usr/local/bin/ghr'
+    - name: Install deps
+      run:  apt-get update && \
+            apt-get install -y --no-install-suggests \
+            ca-certificates \
+            wget
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEBIAN_FRONTEND: noninteractive
+    # - name: Install pants
+    #   run: curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# /usr/local/bin/ghr test_tag /usr/local/bin/ghr
