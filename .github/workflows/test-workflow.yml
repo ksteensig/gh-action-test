@@ -19,7 +19,6 @@ on:
         required: true
         type: boolean
 
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -32,6 +31,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: "echo running linting"
+      - run: "echo ${{ job.status }}"
 
   deploy:
     runs-on: ubuntu-22.04
