@@ -2,7 +2,15 @@ name: "workflow using reusable workflow"
 
 on:
     workflow_dispatch:
+        inputs:
+            name:
+                description: "Name to greet"
+                required: false
+                default: "Mars"
 
 jobs:
     example-job:
         uses: ./.github/workflows/reusable.yml
+
+        with:
+            name: ${{ inputs.name }}

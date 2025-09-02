@@ -2,6 +2,12 @@ name: Reusable
 
 on:
     workflow_call:
+        inputs:
+            name:
+                description: "Name to greet"
+                type: string
+                required: false
+                default: "World"
 
 
 jobs:
@@ -9,4 +15,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Run a one-line script
-              run: "echo Hello, World!"
+              run: "echo ${{ inputs.name }}"
