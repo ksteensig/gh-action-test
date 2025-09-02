@@ -1,40 +1,31 @@
 name: "test workflow"
 
 on:
-  workflow_dispatch:
-    inputs:
-      text_input:
-        description: "this is a text input"
-        required: True
-      choice_input:
-        description: "this is a choice input"
-        required: true
-        type: choice
-        options:
-          - option1
-          - option2
-          - option3
-      bool_input:
-        description: "this is a bool input"
-        required: true
-        type: boolean
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - run: "echo ${{ inputs.text_input }}"
-      - run: "echo ${{ inputs.choice_input }}"
-      - run: "echo ${{ inputs.bool_input }}"
+      - run: "echo BUILD"
 
-  lint:
-    runs-on: ubuntu-22.04
+  test:
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, windows-latest]
+        node: [16, 18]
+
+    runs-on: ${{ matrix.runner }}
+    needs: [build]
     steps:
       - run: "echo running linting"
-      - run: "echo ${{ job.status }}"
+      - run: "echo ${{ matrix.runner }}"
+      - run: "echo ${{ matrix.node }}"
 
   deploy:
-    runs-on: ubuntu-22.04
-    needs: [build, lint]
+    runs-on: ubuntu-latest
+    needs: [test]
     steps:
       - run: "echo deploying"
