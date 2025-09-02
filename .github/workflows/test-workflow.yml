@@ -21,9 +21,9 @@ on:
 
 
 jobs:
-    build:
-        runs-on: ubuntu-22.04
-        steps:
-            - run: "echo ${{ inputs.text_input }}"
-            - run: "echo ${{ inputs.choice_input }}"
-            - run: "echo ${{ inputs.bool_input }}"
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: "echo ${{ inputs.text_input }}"
+      - run: "echo ${{ inputs.choice_input }}"
+      - run: "echo ${{ inputs.bool_input }}"
