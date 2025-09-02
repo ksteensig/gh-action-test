@@ -27,3 +27,14 @@ jobs:
       - run: "echo ${{ inputs.text_input }}"
       - run: "echo ${{ inputs.choice_input }}"
       - run: "echo ${{ inputs.bool_input }}"
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: "echo running linting"
+
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: [build, lint]
+    steps:
+      - run: "echo deploying"
