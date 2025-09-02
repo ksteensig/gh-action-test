@@ -4,8 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       text_input:
-        description: "hello"
+        description: "this is a text input"
         required: True
+      choice_input:
+        description: "this is a choice input"
+        required: true
+        type: choice
+        options:
+          - option1
+          - option2
+          - option3
+      bool_input:
+        description: "this is a bool input"
+        required: true
+        type: boolean
 
 
 jobs:
@@ -13,3 +25,5 @@ jobs:
         runs-on: ubuntu-22.04
         steps:
             - run: "echo ${{ inputs.text_input }}"
+            - run: "echo ${{ inputs.choice_input }}"
+            - run: "echo ${{ inputs.bool_input }}"
