@@ -14,3 +14,9 @@ jobs:
 
         with:
             name: ${{ inputs.name }}
+    another-job:
+        needs: example-job
+        runs-on: ubuntu-latest
+        steps:
+            - name: "show job time from reusable workflow"
+              run: echo "the reusable job finished at ${{needs.example-job.outputs.job-time}}"

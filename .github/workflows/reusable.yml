@@ -9,10 +9,22 @@ on:
                 required: false
                 default: "World"
 
+        outputs:
+            job-time:
+                description: "time output"
+                value: "${{jobs.reusable.outputs.job-time}}"
 
 jobs:
     reusable:
         runs-on: ubuntu-latest
+        outputs:
+            job-time: ${{steps.step-step-with-time.outputs.step_time_value}}
         steps:
             - name: Run a one-line script
               run: "echo ${{ inputs.name }}"
+            - name: "Output the current time"
+              id: step-with-time
+              run: |
+                echo "Current time: $(date)"
+                echo "Current time: $(date)" >> "$GITHUB_STEP_SUMMARY"
+                echo "step_time_value=$(date)" >> "$GITHUB_OUTPUT"
